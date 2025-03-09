@@ -1,0 +1,82 @@
+import { serverOrigin, serverPrefix } from "./constant";
+import { HouseCode, HouseInfo } from "./type";
+import AWS from "aws-sdk"
+import { customAlphabet } from "nanoid";
+
+export async function getHouseAPI(limit: number, offset: number): Promise<Array<HouseInfo>> {
+    const url = serverOrigin + serverPrefix + "/house" + "?limit=" + limit + "&offset=" + offset;
+    const response = await fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    if (response.ok) {
+        return response.json();
+    }
+    return [];
+};
+
+export async function addHouseItemAPI(input: HouseInfo): Promise<HouseCode | undefined> {
+    const url = serverOrigin + serverPrefix + "/manager/add";
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input)
+    });
+    if (response.ok) {
+        return response.json();
+    }
+    return undefined;
+}
+
+export async function uploadFileAPI(files: FileList | undefined, name: string): Promise<boolean> {
+    if (!files) return false;
+
+    AWS.config.update({
+        region: process.env.NEXT_PUBLIC_AWS_REGION,
+        accessKeyId: process.env.NEXT_PUBLIC_AWS_KEY,
+        secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET,
+    });
+
+    let success = true;
+    for (let i = 0; i < files.length; i++) {
+        const fileFormat = files[i].name.split('.').reverse()[0];
+        const upload = new AWS.S3.ManagedUpload({
+            params: {
+              Bucket: 'vre-image-resource',
+              Key: name + '-' + (i + 1),
+              Body: files[i],
+              ContentType: files[i].type,
+            },
+        });
+        upload.promise().then(
+            () => { console.log('Image upload complete.'); }, 
+            () => { success = false; }
+        );
+    }
+
+    return success;
+}
+
+export function createImageKeys(files: FileList, name: string,): string[] {
+    let resultArray = [];
+    for (let i = 0; i < files.length; i++) {
+        const resultImageKey = name + '-' + (i + 1);
+        resultArray.push(resultImageKey);
+    }
+    return resultArray;
+}
+
+export function createHouseCode(): string {
+    const now = new Date();
+    const year = now.getFullYear().toString();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0'); ;
+
+    const nanoid1 = customAlphabet("0123456789", 2);
+    const nanoid2 = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWYZ", 4);
+    
+    return year + month + '-' + nanoid1() + nanoid2();
+}
