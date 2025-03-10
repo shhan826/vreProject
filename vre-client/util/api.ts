@@ -17,6 +17,20 @@ export async function getHouseAPI(limit: number, offset: number): Promise<Array<
     return [];
 };
 
+export async function getHouseItemAPI(code: string): Promise<undefined | HouseInfo[]> {
+    const url = serverOrigin + serverPrefix + "/houseitem" + "?code=" + code ;
+    const response = await fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    if (response.ok) {
+        return response.json();
+    }
+    return undefined;
+};
+
 export async function addHouseItemAPI(input: HouseInfo): Promise<HouseCode | undefined> {
     const url = serverOrigin + serverPrefix + "/manager/add";
     const response = await fetch(url, {
@@ -79,4 +93,17 @@ export function createHouseCode(): string {
     const nanoid2 = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWYZ", 4);
     
     return year + month + '-' + nanoid1() + nanoid2();
+}
+
+export function makeImageUrls(imageKeys: string): string[]{
+    let result: string[] = [];
+
+    const keyArray = JSON.parse(imageKeys);
+    if (!keyArray) return result;
+
+    for (let i = 0; i < keyArray.length; i++) {
+        const url = 'https://vre-image-resource.s3.ap-southeast-2.amazonaws.com/' + keyArray[i];
+        result.push(url);
+    }
+    return result;
 }

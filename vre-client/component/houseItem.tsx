@@ -4,6 +4,7 @@ import { HouseInfo } from "@/util/type";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from 'next/link'
+import { makeImageUrls } from "@/util/api";
 
 interface HouseItemProps {
     data: HouseInfo
@@ -16,18 +17,12 @@ export default function HouseItem (props: HouseItemProps)
 
     useEffect(() => {
         if (data.image_keys === undefined) return;
-        const keyArray = JSON.parse(data.image_keys);
-        if (!keyArray) return;
-        const urls = [];
-        for (let i = 0; i < keyArray.length; i++) {
-            const url = 'https://vre-image-resource.s3.ap-southeast-2.amazonaws.com/' + keyArray[i];
-            urls.push(url);
-        }
+        const urls = makeImageUrls(data.image_keys);
         setImageUrls(urls);
     }, [])
 
     return(
-        <Link href="/">
+        <Link href={"/house?code=" + data.code}>
             <div className="bg-white w-full xl:w-[350px] rounded-2xl shadow-[0_2px_10px_5px_rgba(0,0,0,0.05)] flex p-2">
                 <div className="flex-col">
                     <div className="flex gap-2">

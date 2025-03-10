@@ -1,4 +1,4 @@
-export default function TopHeader ()
+export default function TopHeaderMain ()
 {
     return(
         <div className="fixed left-0 top-0 z-9 bg-white w-full">

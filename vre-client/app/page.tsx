@@ -1,14 +1,14 @@
 import HouseList from "@/component/houseList";
-import TopHeader from "@/component/topHeader";
+import TopHeaderMain from "@/component/topHeaderMain";
 
 export default function Home() {
   return (
     <div>
-      <TopHeader/>
+      <TopHeaderMain/>
       <main className="pt-15 m-auto xl:max-w-5xl lg:max-w-4xl">
         <HouseList/>
       </main>
-      { /* <BottomNaviTab/> */ }
+      { /* <BottomFooter/> */ }
     </div>
   );
 };

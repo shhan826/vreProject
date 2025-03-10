@@ -9,11 +9,6 @@ const app = express();
 const port = 3001;
 const preFix = '/api/v1';
 
-async function getNewHouseId() {
-
-    return result;
-};
-
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true
@@ -32,6 +27,19 @@ app.get(preFix + '/house', async (req, res) => {
         res.status(200).send(result);
     } catch (err) {
         res.status(500).send(`Database connection failed: ${err.message}`);
+    }
+});
+
+app.get(preFix + '/houseitem', async (req, res) => {
+    try {
+        const houseCode = req.query.code;
+        const selectQuery = 'SELECT * FROM property_info WHERE code="' + houseCode +'"';
+
+        const connection = await conn;
+        const result = await connection.query(selectQuery);
+        res.status(200).send(result);
+    } catch (err) {
+        res.status(500).send(`Database connection failed: ${err.message}`);   
     }
 });
 
