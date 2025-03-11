@@ -17,5 +17,4 @@ export interface HouseInfo {
     option_info?: string,
     image_keys: string,
     details?: string,
-    deleted: boolean
 }

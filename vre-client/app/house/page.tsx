@@ -50,6 +50,7 @@ export default function Home() {
     }
 
     useEffect(() => {
+        if (!code) return;
         getHouseItemAPI(code)
         .then((result) => handleHouseItemResult(result))
     }, [code]);
