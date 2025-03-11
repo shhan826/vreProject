@@ -9,15 +9,21 @@ export default function TopHeaderSub ()
         window.history.back();
     }
     const share = () => {
-        window.navigator.share({
-            title: "Share",
-            text: "Share house information.",
-            url: window.location.href
-        }).then((result) => {
-            console.log(result);
-        }). catch((err) => {
-            console.log(err);
-        })
+        const isShareSupported = (window.navigator.share !== undefined) ? true : false;
+        if (isShareSupported) {
+            window.navigator.share({
+                title: "Share",
+                text: "Share house information.",
+                url: window.location.href
+            }).then((result) => {
+                console.log(result);
+            }). catch((err) => {
+                console.log(err);
+            });
+        } else {
+            navigator.clipboard.writeText(window.location.href);
+            alert('Copied this page url.');
+        }
     };
     return(
         <div className="fixed left-0 top-0 z-9 bg-white w-full shadow-[0_4px_4px_0_rgba(0,0,0,0.03)]">
