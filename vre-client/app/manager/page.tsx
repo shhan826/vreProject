@@ -1,11 +1,14 @@
 'use client'
 
-import { addHouseItemAPI, createHouseCode, createImageKeys, uploadFileAPI } from "@/util/api";
-import { HouseInfo } from "@/util/type";
-import { useCallback, useRef, useState } from "react";
-import Image from "next/image";
+// import { addHouseItemAPI, createHouseCode, createImageKeys, uploadFileAPI } from "@/util/api";
+// import { HouseInfo } from "@/util/type";
+// import { useCallback, useRef, useState } from "react";
+// import Image from "next/image";
 
 export default function Home() {
+    // 관리자 페이지 로그인 구현까지 기능 막음 처리
+    return <span>Still Making pages for managers...</span>;
+    /*
     const [city, setCity] = useState('');
     const [district, setDistrict] = useState('');
     const [ward, setWard] = useState('');
@@ -18,6 +21,7 @@ export default function Home() {
     const [bathroomCount, setBathroomCount] = useState('');
     const [optionInfo, setOptionInfo] = useState('');
     const [imageFiles, setImageFiles] = useState<FileList | undefined>();
+    const [details, setDetails] = useState('');
 
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -54,6 +58,9 @@ export default function Home() {
     const onOptionInfoHandler = (event: React.FormEvent<HTMLInputElement>) => {
         setOptionInfo(event.currentTarget.value);
     };
+    const onDetailsHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setDetails(event.currentTarget.value);
+    };
     const clearInputInfo = () => {
         setCity('');
         setDistrict('');
@@ -67,6 +74,7 @@ export default function Home() {
         setBathroomCount('');
         setOptionInfo('');
         setImageFiles(undefined);
+        setDetails('');
         if (inputRef.current) {
             inputRef.current.value = '';
         }
@@ -88,7 +96,8 @@ export default function Home() {
             room_count: roomCount,
             bathroom_count: bathroomCount,
             option_info: optionInfo,
-            image_keys: JSON.stringify(imageKeys)
+            image_keys: JSON.stringify(imageKeys),
+            details: details
         }
     
         addHouseItemAPI(input)
@@ -194,6 +203,10 @@ export default function Home() {
                             <td>옵션(풀옵션/노옵션)</td>
                             <td><input className='border-2 rounded-md w-md' type='text' value={optionInfo} onChange={onOptionInfoHandler}/></td>
                         </tr>
+                        <tr>
+                            <td>추가 정보</td>
+                            <td><textarea className='border-2 rounded-md w-md h-20' value={details} onChange={onDetailsHandler}/></td>
+                        </tr>
                         </tbody>
                     </table>
                 </form>
@@ -216,4 +229,5 @@ export default function Home() {
             </div>
         </div>
     );
+    */
 };

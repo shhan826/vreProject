@@ -10,8 +10,8 @@ export default function TopHeaderSub ()
     }
     const share = () => {
         window.navigator.share({
-            title: "제목",
-            text: "설명",
+            title: "Share",
+            text: "Share house information.",
             url: window.location.href
         }).then((result) => {
             console.log(result);

@@ -32,8 +32,9 @@ export default function HouseItem (props: HouseItemProps)
                                 key={imageUrls[0]}
                                 src={imageUrls[0]}
                                 alt="image"
-                                width={150}
-                                height={150}
+                                width={0}
+                                height={0}
+                                sizes="100vw"
                                 className="w-[150px] h-[150px]"
                             />
                             }
@@ -50,7 +51,7 @@ export default function HouseItem (props: HouseItemProps)
                                 {data.city}, {data.district}, {data.ward}
                             </div>
                             <div className="font-semibold text-sm leading-4 line-clamp-2">{data.apartment_name}</div>
-                            <div className="font-bold text-red-700 text-sm truncate">{data.price}</div>
+                            <div className="font-bold text-red-700 text-sm truncate">{data.price + 'đ'}</div>
                             <div className="text-xs truncate">
                                 <Image
                                     src="/bed.svg"
@@ -75,7 +76,7 @@ export default function HouseItem (props: HouseItemProps)
                                     height={16}
                                     className="inline-block"
                                 />
-                                &nbsp;{data.area}
+                                &nbsp;{data.area + '㎡'}
                             </div>
                         </div>
                     </div>

@@ -20,8 +20,10 @@ app.get(preFix + '/house', async (req, res) => {
     try {
         const limit = req.query.limit;
         const offset = req.query.offset;
-        const selectQuery = 'SELECT * FROM property_info ORDER BY id*1 DESC' + ' LIMIT ' + limit + ' OFFSET ' + offset;
-        
+        const isAll = req.query.all;
+        const whereQuery = isAll === true ? '' : ' WHERE deleted!=1';
+        const selectQuery = 'SELECT * FROM property_info' + whereQuery + ' ORDER BY id*1 DESC' + ' LIMIT ' + limit + ' OFFSET ' + offset;
+
         const connection = await conn;
         const result = await connection.query(selectQuery);
         res.status(200).send(result);
@@ -54,7 +56,7 @@ app.post(preFix + '/manager/add', async (req, res) => {
 
         if (count !== Number.NaN && input) {
             const id = count + 1;
-            const insertQuery = 'INSERT INTO property_info VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            const insertQuery = 'INSERT INTO property_info VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
             const params = [
                 id, 
                 input.code, 
@@ -69,7 +71,8 @@ app.post(preFix + '/manager/add', async (req, res) => {
                 input.room_count, 
                 input.bathroom_count, 
                 input.option_info,
-                input.image_keys
+                input.image_keys,
+                input.details
             ];
             await connection.query(insertQuery, params);
             res.status(200).send({code: input.code});

@@ -15,5 +15,7 @@ export interface HouseInfo {
     room_count?: string,
     bathroom_count?: string,
     option_info?: string,
-    image_keys: string
+    image_keys: string,
+    details?: string,
+    deleted: boolean
 }

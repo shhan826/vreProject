@@ -3,8 +3,8 @@ import { HouseCode, HouseInfo } from "./type";
 import AWS from "aws-sdk"
 import { customAlphabet } from "nanoid";
 
-export async function getHouseAPI(limit: number, offset: number): Promise<Array<HouseInfo>> {
-    const url = serverOrigin + serverPrefix + "/house" + "?limit=" + limit + "&offset=" + offset;
+export async function getHouseAPI(limit: number, offset: number, all: boolean): Promise<Array<HouseInfo>> {
+    const url = serverOrigin + serverPrefix + "/house" + "?limit=" + limit + "&offset=" + offset + "&all=" + all;
     const response = await fetch(url, {
         method: "GET",
         headers: {

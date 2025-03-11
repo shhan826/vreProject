@@ -5,7 +5,7 @@ import { HouseInfo } from "@/util/type";
 import { useEffect, useRef, useState } from "react";
 import HouseItem from "./houseItem";
 
-const itemLimit = 5;
+const itemLimit = 25;
 
 export default function HouseList ()
 {   
@@ -32,7 +32,7 @@ export default function HouseList ()
     };
 
     useEffect(() => {
-        getHouseAPI(itemLimit, itemOffset)
+        getHouseAPI(itemLimit, itemOffset, false)
         .then((result) => handleHouseResult(result))
     }, [itemOffset]);
     useEffect(() => {
