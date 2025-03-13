@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { districtFullArray, typeFullArray } from '@/util/constant';
@@ -36,30 +36,41 @@ export default function CategoryModal (props: CategoryModalProps)
         roomFilter
     } = props;
 
-    let selectDistrictArray = [];
+    let selectDistrictArray: Array<boolean> = [];
     for (let i = 0; i < districtFullArray.length; i++) {
         const isSelect = districtFilter.indexOf(districtFullArray[i]) === -1 ? false : true;
         selectDistrictArray.push(isSelect);
     }
-    let selectTypeArray = [];
+    let selectTypeArray: Array<boolean>  = [];
     for (let i = 0; i < typeFullArray.length; i++) {
         const isSelect = typeFilter.indexOf(typeFullArray[i]) === -1 ? false : true;
         selectTypeArray.push(isSelect);
     }
-    const [priceStart, setPriceStart] = useState<string>(props.priceFilter.start?.toString() || '');
-    const [priceEnd, setPriceEnd] = useState<string>(props.priceFilter.end?.toString() || '');
-    const [areaStart, setAreaStart] = useState<string>(props.areaFilter.start?.toString() || '');
-    const [areaEnd, setAreaEnd] = useState<string>(props.areaFilter.end?.toString() || '');
-    const [roomStart, setRoomStart] = useState<string>(props.roomFilter.start?.toString() || '');
-    const [roomEnd, setRoomEnd] = useState<string>(props.roomFilter.end?.toString() || '');
-    const [districtSelectArray, setDistrictSelectArray] = useState(selectDistrictArray);
-    const [typeSelectArray, setTypeSelectArray] = useState(selectTypeArray);
+    const [priceStart, setPriceStart] = useState<string>('');
+    const [priceEnd, setPriceEnd] = useState<string>('');
+    const [areaStart, setAreaStart] = useState<string>('');
+    const [areaEnd, setAreaEnd] = useState<string>('');
+    const [roomStart, setRoomStart] = useState<string>('');
+    const [roomEnd, setRoomEnd] = useState<string>('');
+    const [districtSelectArray, setDistrictSelectArray] = useState<boolean[]>([]);
+    const [typeSelectArray, setTypeSelectArray] = useState<boolean[]>([]);
 
     const modalRef = useRef(null);
     const backgroundRef = useRef(null);
 
     const unSelectedStyle = 'py-1 px-4 mr-2 mb-2 text-sm bg-gray-200 border-1 border-gray-200 rounded-full cursor-pointer';
     const selectedStyle = 'py-1 px-4 mr-2 mb-2 text-sm text-[#6b015a] bg-[#6b015a]/10 border-1 border-[#6b015a] rounded-full cursor-pointer';
+
+    useEffect(() => {
+        setPriceStart(props.priceFilter.start?.toString() || '');
+        setPriceEnd(props.priceFilter.end?.toString() || '');
+        setAreaStart(props.areaFilter.start?.toString() || '');
+        setAreaEnd(props.areaFilter.end?.toString() || '');
+        setRoomStart(props.roomFilter.start?.toString() || '');
+        setRoomEnd(props.roomFilter.end?.toString() || '');
+        setDistrictSelectArray(selectDistrictArray);
+        setTypeSelectArray(selectTypeArray);
+    }, [props]);
 
     const onPriceStartHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPriceStart(e.target.value);

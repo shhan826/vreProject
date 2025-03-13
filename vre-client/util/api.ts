@@ -18,13 +18,13 @@ export async function getHouseAPI(
         searchTitle?: string | null
     ): Promise<Array<HouseInfo>> {
     const pricestartParam = pricestart ? '&pricestart=' + pricestart : '';
-    const priceendParam = pricestart ? '&priceend=' + priceend : '';
+    const priceendParam = priceend ? '&priceend=' + priceend : '';
     const districtParam = district ? '&district=' + district : '';
     const typeParam = type ? '&type=' + type : '';
     const areastartParam = areastart ? '&areastart=' + areastart : '';
-    const areaendParam = areastart ? '&areaend=' + areaend : '';
+    const areaendParam = areaend ? '&areaend=' + areaend : '';
     const roomstartParam = roomstart ? '&roomstart=' + roomstart : '';
-    const roomendParam = roomstart ? '&roomend=' + roomend : '';
+    const roomendParam = roomend ? '&roomend=' + roomend : '';
     const searchTitleParam = searchTitle ? '&searchtitle=' + searchTitle : '';
 
     const url = serverOrigin 
