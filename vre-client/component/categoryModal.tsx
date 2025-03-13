@@ -142,7 +142,7 @@ export default function CategoryModal (props: CategoryModalProps)
                 <div ref={backgroundRef} className="fixed top-0 w-full h-full bg-black opacity-50" onClick={onApply}/>
             </CSSTransition>
             <CSSTransition nodeRef={modalRef} in={isModalOpen} timeout={500} mountOnEnter unmountOnExit classNames="trans-modal">
-                <div ref={modalRef} className='fixed top-[50%] left-1/2 -translate-x-1/2 h-[50%] w-full bg-white rounded-t-xl lg:max-w-3xl'>
+                <div ref={modalRef} className='fixed top-[20%] left-1/2 -translate-x-1/2 h-[80%] w-full bg-white rounded-t-xl lg:max-w-3xl'>
                     <div>
                         <div className="m-5 fixed top-0 right-0 my-5"> 
                             <button className="rounded-full bg-gray-400 text-white cursor-pointer py-1 px-3 mr-2 text-sm" onClick={onReset}>Reset</button>

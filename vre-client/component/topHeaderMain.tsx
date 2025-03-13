@@ -89,6 +89,15 @@ export default function TopHeaderMain ()
         setSearhTitle('');
         applyFilter(priceFilter, districtFilter, typeFilter, areaFilter, roomFilter);
     };
+    const clearFilter = () => {
+        applyFilter(
+            {start: undefined, end: undefined},
+            [],
+            [],
+            {start: undefined, end: undefined},
+            {start: undefined, end: undefined}
+        );
+    }
     const onEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key == 'Enter') {
             onSearch();
@@ -154,7 +163,7 @@ export default function TopHeaderMain ()
     return(
         <div className="fixed left-0 top-0 z-9 bg-white w-full">
             <div className="flex justify-between items-center h-13 px-3 xl:max-w-6xl lg:max-w-4xl m-auto">
-                <div className={`text-[27px] text-[#6b015a] font-bold cursor-pointer ${RobotoFont.className}`}>Thuelaco</div>
+                <div className={`text-[27px] text-[#6b015a] font-bold cursor-pointer ${RobotoFont.className}`} onClick={clearFilter}>Thuelaco</div>
 
                 <div>
                     <input className="mx-2 py-1 px-3 text-sm border-1 border-gray-200 rounded-xl" type="text" value={searchTitle} onChange={onSearchTitleHandler} onKeyDown={onEnter}/>
