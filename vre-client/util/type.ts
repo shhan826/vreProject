@@ -1,6 +1,6 @@
 export interface HouseCode {
     code: string
-}
+};
 
 export interface HouseInfo {
     code: string,
@@ -10,11 +10,17 @@ export interface HouseInfo {
     detail_address: string,
     property_type: string,
     apartment_name?: string,
-    price: string,
-    area: string,
-    room_count?: string,
-    bathroom_count?: string,
+    price: number,
+    area: number,
+    number_floors?: number,
+    room_count?: number,
+    bathroom_count?: number,
     option_info?: string,
     image_keys: string,
     details?: string,
-}
+};
+
+export interface ScopePair {
+    start: number | undefined,
+    end: number | undefined
+};

@@ -3,8 +3,45 @@ import { HouseCode, HouseInfo } from "./type";
 import AWS from "aws-sdk"
 import { customAlphabet } from "nanoid";
 
-export async function getHouseAPI(limit: number, offset: number, all: boolean): Promise<Array<HouseInfo>> {
-    const url = serverOrigin + serverPrefix + "/house" + "?limit=" + limit + "&offset=" + offset + "&all=" + all;
+export async function getHouseAPI(
+        limit: number, 
+        offset: number, 
+        all: boolean, 
+        pricestart?: number | null, 
+        priceend?: number | null,
+        district?: string | null,
+        type?: string | null,
+        areastart?: number | null,
+        areaend?: number | null,
+        roomstart?: number | null,
+        roomend?: number | null,
+        searchTitle?: string | null
+    ): Promise<Array<HouseInfo>> {
+    const pricestartParam = pricestart ? '&pricestart=' + pricestart : '';
+    const priceendParam = pricestart ? '&priceend=' + priceend : '';
+    const districtParam = district ? '&district=' + district : '';
+    const typeParam = type ? '&type=' + type : '';
+    const areastartParam = areastart ? '&areastart=' + areastart : '';
+    const areaendParam = areastart ? '&areaend=' + areaend : '';
+    const roomstartParam = roomstart ? '&roomstart=' + roomstart : '';
+    const roomendParam = roomstart ? '&roomend=' + roomend : '';
+    const searchTitleParam = searchTitle ? '&searchtitle=' + searchTitle : '';
+
+    const url = serverOrigin 
+        + serverPrefix 
+        + "/house" 
+        + "?limit=" + limit 
+        + "&offset=" + offset 
+        + "&all=" + all
+        + pricestartParam 
+        + priceendParam
+        + districtParam
+        + typeParam
+        + areastartParam
+        + areaendParam
+        + roomstartParam
+        + roomendParam
+        + searchTitleParam;
     const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -98,12 +135,17 @@ export function createHouseCode(): string {
 export function makeImageUrls(imageKeys: string): string[]{
     let result: string[] = [];
 
-    const keyArray = JSON.parse(imageKeys);
-    if (!keyArray) return result;
+    try {
+        const keyArray = JSON.parse(imageKeys);
+        if (!keyArray) return result;
 
-    for (let i = 0; i < keyArray.length; i++) {
-        const url = 'https://vre-image-resource.s3.ap-southeast-2.amazonaws.com/' + keyArray[i];
-        result.push(url);
-    }
+        for (let i = 0; i < keyArray.length; i++) {
+            const url = 'https://vre-image-resource.s3.ap-southeast-2.amazonaws.com/' + keyArray[i];
+            result.push(url);
+        }
+    } catch(e) {
+        console.log(e);
+        return result;
+    };
     return result;
 }

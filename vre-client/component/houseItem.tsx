@@ -1,9 +1,10 @@
 'use client'
 
-import { HouseInfo } from "@/util/type";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from 'next/link'
+
+import { HouseInfo } from "@/util/type";
 import { makeImageUrls } from "@/util/api";
 
 interface HouseItemProps {
@@ -39,6 +40,7 @@ export default function HouseItem (props: HouseItemProps)
                             />
                             }
                         </div>
+
                         <div className="h-[120px] max-w-[200px] sm:max-w-[480px] md:max-w-xl lg:w-[200px] flex flex-col gap-1">
                             <div className="text-[10px] text-gray-500 truncate inline-block">
                                 <Image
@@ -48,10 +50,13 @@ export default function HouseItem (props: HouseItemProps)
                                     height={18}
                                     className="inline-block"
                                 />
-                                {data.city}, {data.district}, {data.ward}
+                                {data.ward}, {data.district}, {data.city}
                             </div>
+
                             <div className="font-semibold text-sm leading-4 line-clamp-2">{data.apartment_name}</div>
+
                             <div className="font-bold text-red-700 text-sm truncate">{data.price + 'đ'}</div>
+
                             <div className="text-xs truncate">
                                 <Image
                                     src="/bed.svg"
@@ -80,8 +85,6 @@ export default function HouseItem (props: HouseItemProps)
                             </div>
                         </div>
                     </div>
-
-                    
                 </div>
             </div>
         </Link>

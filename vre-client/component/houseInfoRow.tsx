@@ -1,6 +1,6 @@
 interface HouseInfoRowProps {
     subject: string,
-    content: string | undefined
+    content: string | number | undefined
 }
 
 export default function HouseInfoRow (props: HouseInfoRowProps)

@@ -12,8 +12,6 @@ export default function TopHeaderSub ()
         const isShareSupported = (window.navigator.share !== undefined) ? true : false;
         if (isShareSupported) {
             window.navigator.share({
-                title: "Share",
-                text: "Share house information.",
                 url: window.location.href
             }).then((result) => {
                 console.log(result);
@@ -27,7 +25,7 @@ export default function TopHeaderSub ()
     };
     return(
         <div className="fixed left-0 top-0 z-9 bg-white w-full shadow-[0_4px_4px_0_rgba(0,0,0,0.03)]">
-            <div className="flex items-center h-13 px-3 xl:max-w-5xl lg:max-w-4xl m-auto place-content-between">
+            <div className="flex items-center h-13 px-3 xl:max-w-6xl lg:max-w-4xl m-auto place-content-between">
                 <button onClick={goBack}>
                     <Image
                         src="/back.svg"

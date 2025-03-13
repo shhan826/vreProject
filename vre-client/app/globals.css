@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* 공통 스타일 */
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -17,4 +18,61 @@ img {
   overflow-clip-margin: content-box;
   overflow: clip;
   object-fit: cover;
+}
+
+/* 애니메이션 */
+@keyframes openModal {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes closeModal {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.trans-modal-enter-active {
+  animation: openModal 0.4s ease-out forwards;
+}
+
+.trans-modal-exit-active {
+  animation: closeModal 0.4s ease-out forwards;
+}
+
+.fade-enter-active {
+  animation: fadein 0.4s ease-out forwards;
+}
+
+.fade-exit-active {
+  animation: fadeout 0.4s ease-out forwards;
 }

@@ -1,14 +1,15 @@
 'use client'
 
-import BottomFooter from "@/component/bottomFooter";
-import TopHeaderSub from "@/component/topHeaderSub";
-import { getHouseItemAPI, makeImageUrls } from "@/util/api";
-import { HouseInfo } from "@/util/type";
-import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from "react";
+import { useSearchParams } from 'next/navigation'
 import Image from "next/image";
 import Link from 'next/link'
+
+import BottomFooter from "@/component/bottomFooter";
+import TopHeaderSub from "@/component/topHeaderSub";
 import HouseInfoRow from "@/component/houseInfoRow";
+import { getHouseItemAPI, makeImageUrls } from "@/util/api";
+import { HouseInfo } from "@/util/type";
 
 export default function Home() {
     const [imageUrls, setImageURls] = useState<string[]>();
@@ -20,10 +21,10 @@ export default function Home() {
         detail_address: '',
         property_type: '',
         apartment_name: '',
-        price: '',
-        area: '',
-        room_count: '',
-        bathroom_count: '',
+        price: -1,
+        area: -1,
+        room_count: -1,
+        bathroom_count: -1,
         option_info: '',
         image_keys: '',
         details: ''
@@ -31,6 +32,7 @@ export default function Home() {
     
     const searchParams = useSearchParams();
     const code = searchParams.get('code');
+
     const fullAddress = 
         (houseItem.detail_address ? houseItem.detail_address + ', ' : '') + 
         (houseItem.ward ? houseItem.ward + ', ' : '') +
@@ -46,7 +48,7 @@ export default function Home() {
     }
     const copyPhoneNumber = () => {
         navigator.clipboard.writeText('02-1234-567');
-        alert('부동산 전화번호가 복사되었습니다. 해당 부동산으로 문의해주세요. (02-1234-567)');
+        alert('Inquiry number is copied. (02-1234-567)');
     }
 
     useEffect(() => {
@@ -58,12 +60,12 @@ export default function Home() {
     return (
         <div>
             <TopHeaderSub/>
-            <main className="mt-13 mb-19 mx-auto xl:max-w-5xl lg:max-w-4xl">
+            <main className="mt-13 mb-19 mx-auto xl:max-w-6xl lg:max-w-4xl">
                 <div className="pt-8 px-4">
                     <div className="pb-4">
                         <span className="text-[22px] font-bold">{houseItem.apartment_name}</span>
                     </div>
-
+                    
                     <div className="pt-3 pb-6 border-gray-100 border-t-1">
                         <span className="text-lg font-bold">
                             Thông tin chi tiết
@@ -125,8 +127,8 @@ export default function Home() {
                 </div>
             </main>
             <BottomFooter>
-                <button className="btn btn-primary w-full h-3/4" onClick={copyPhoneNumber}>
-                    <span className="text-lg font-medium">Contact (02-123-4567)</span>
+                <button className="w-full h-3/4 rounded-xl cursor-pointer bg-[#6b015a]" onClick={copyPhoneNumber}>
+                    <span className="text-lg text-white font-medium">Contact (02-123-4567)</span>
                 </button>
             </BottomFooter>
         </div>

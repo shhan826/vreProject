@@ -6,7 +6,7 @@
 // import Image from "next/image";
 
 export default function Home() {
-    // 관리자 페이지 로그인 구현까지 기능 막음 처리
+    // TODO: 관리자 페이지 로그인 구현까지 기능 막음 처리
     return <span>Still Making pages for managers...</span>;
     /*
     const [city, setCity] = useState('');

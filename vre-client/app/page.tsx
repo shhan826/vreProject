@@ -5,10 +5,13 @@ export default function Home() {
   return (
     <div>
       <TopHeaderMain/>
-      <main className="pt-15 m-auto xl:max-w-5xl lg:max-w-4xl">
+      <main className="pt-26 m-auto xl:max-w-6xl lg:max-w-4xl">
         <HouseList/>
       </main>
-      { /* <BottomFooter/> */ }
+      { /* 
+        TODO: 추후 회원 기능과 함께 구현 필요
+        <BottomFooter/>
+      */ }
     </div>
   );
 };
