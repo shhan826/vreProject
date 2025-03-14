@@ -36,11 +36,10 @@ export default function Home() {
         (houseItem.district ? houseItem.district + ', ' : '') +
         houseItem.city;
 
-    const handleHouseItemResult = (result: HouseInfo[] | undefined) => {
-        if (result === undefined || result.length === 0) return;
-        const item = result[0];
-        const urls = makeImageUrls(item.image_keys);
-        setHouseItem(item);
+    const handleHouseItemResult = (result: HouseInfo | undefined) => {
+        if (result === undefined) return;
+        const urls = makeImageUrls(result.image_keys);
+        setHouseItem(result);
         setImageURls(urls);
     }
     const copyPhoneNumber = () => {

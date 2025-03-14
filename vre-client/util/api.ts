@@ -54,7 +54,7 @@ export async function getHouseAPI(
     return [];
 };
 
-export async function getHouseItemAPI(code: string): Promise<undefined | HouseInfo[]> {
+export async function getHouseItemAPI(code: string): Promise<undefined | HouseInfo> {
     const url = serverOrigin + serverPrefix + "/houseitem" + "?code=" + code ;
     const response = await fetch(url, {
         method: "GET",

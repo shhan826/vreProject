@@ -1,6 +1,5 @@
 // MODIFY HERE <----
-
-export const serverOrigin = 'http://localhost:3001';
+export const serverOrigin = 'http://localhost:3000';
 export const serverPrefix = '/api/v1';
 
 export const districtFullArray = ['test-district1', 'test-district2', 'test-district3'];
