@@ -1,4 +1,4 @@
-const { conn } = require('../db');
+import { conn } from'../db';
  
 export async function GET(request) {
   const { searchParams } = new URL(request.url)

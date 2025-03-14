@@ -1,5 +1,6 @@
-require('dotenv').config();
-const mariadb = require('mariadb');
+import dotenv from "dotenv";
+import mariadb from 'mariadb';
+dotenv.config();
 
 const conn = mariadb.createConnection({
     host: process.env.DB_HOST,
