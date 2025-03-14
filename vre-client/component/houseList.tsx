@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { getHouseAPI } from "@/util/api";
 import { HouseInfo } from "@/util/type";
 import HouseItem from "./houseItem";
+import SkeletonHouseItem from "./skeletonHouseItem";
 
 const itemLimit = 25;
 
@@ -78,13 +79,23 @@ export default function HouseList ()
             }
         };
     }, [hasMore]);
-
+    
+    if (items.length === 0 && hasMore === false) {
+        return (
+            <div className="p-8 text-center">
+                <div className="text-gray-200">No itmes searched.</div>
+            </div>
+        );
+    }
     return(
         <div className="px-2">
             <div className='grid gap-x-2 gap-y-2 grid-cols-[1fr] lg:grid-cols-[1fr_1fr] xl:grid-cols-[1fr_1fr_1fr]'>
-            { items.map((item) => (
-                <HouseItem key={item.code} data={item}/>
-            ))}
+            { (items.length > 0) ? 
+                items.map((item) => (
+                    <HouseItem key={item.code} data={item}/>
+                )) :
+                <SkeletonHouseItem/>
+            }
             </div>
             <div ref={elementRef} className="h-10"></div>
         </div>
